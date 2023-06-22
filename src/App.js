@@ -1,15 +1,24 @@
-import React, { Component } from 'react'
-import './App.css'
+import React, {useState, useEffect} from 'react'
+import {getData} from './request/api'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <p>HELLO WORLD</p>
-        <p>CHARTS AND GRAPHS</p>
-      </div>
-    )
-  }
+const App = () => {
+  const [loanData, setLoanData] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getData().then((resp) => {
+        return resp
+      })
+      setLoanData(data)
+    }
+    fetchData()
+  }, [])
+
+  return (
+    <div>
+      Test
+    </div>
+  )
 }
 
 export default App
