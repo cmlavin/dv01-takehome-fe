@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import {getData} from './request/api'
+import React, { useState, useEffect } from 'react'
+import { getData } from './request/api'
+import { LoanTable } from './components/LoanTable'
 
 const App = () => {
   const [loanData, setLoanData] = useState([])
@@ -14,9 +15,11 @@ const App = () => {
     fetchData()
   }, [])
 
+console.log('loanData', loanData)
+
   return (
     <div>
-      Test
+      <LoanTable data={loanData} />
     </div>
   )
 }
