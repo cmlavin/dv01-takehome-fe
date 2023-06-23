@@ -8,7 +8,7 @@ import {
     TableRow
 } from '@mui/material'
 
-export const LoanTable = ({data}) => {
+export const LoanTable = ({data, homeOwnership}) => {
     // get all unique grades present in the data
     const uniqueGrades = [...new Set(data.map(obj => obj.grade))]
     // sort the grades from lowest to highest
@@ -21,10 +21,19 @@ export const LoanTable = ({data}) => {
 
     const generateRows = () => {
         const currentBalanceSum = {}
+
         // populate currentBalanceSum obj with sorted grades at an initial sum of 0
         sortedGrades.map(grade => currentBalanceSum[grade] = 0)
-        // add the currentBalance to the sum in the appropriate key-value pair in currentBalanceSum
-        data.map(obj => currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance))
+
+        // iterate over loan data and filter results based on dropdown selection
+        data.map(obj => {
+            if (!!homeOwnership && obj.homeOwnership === homeOwnership.toUpperCase()) {
+                // add the currentBalance to the sum in the appropriate key-value pair in currentBalanceSum
+                currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance)
+            } else if (!homeOwnership) { 
+                currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance) }
+        })
+
         return Object.values(currentBalanceSum).map((sum, index) => 
             <TableCell key={`current-balance-${index}-sum`}>{`$${sum.toFixed(2)}`}</TableCell>
         )
