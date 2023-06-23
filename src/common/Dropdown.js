@@ -10,7 +10,7 @@ import {
 export const Dropdown = ({label, options, value, handleChange}) => {
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 175 }}>
       <FormControl fullWidth>
         <InputLabel id={`${label}-select-label`}>{label}</InputLabel>
         <Select
@@ -20,7 +20,7 @@ export const Dropdown = ({label, options, value, handleChange}) => {
           label={label}
           onChange={handleChange}
         >
-        {Object.values(options).map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}
+        {options.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}
         </Select>
       </FormControl>
     </Box>

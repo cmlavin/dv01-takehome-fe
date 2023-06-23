@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Box,
-  InputLabel,
-  MenuItem,
-  Select
-} from '@mui/material'
+import { Box } from '@mui/material'
 import { getData } from './request/api'
 import { LoanTable } from './components/LoanTable'
 import { Dropdown } from './common/Dropdown'
@@ -18,6 +13,9 @@ const homeOwnershipEnum = {
 const App = () => {
   const [loanData, setLoanData] = useState([])
   const [homeOwnership, setHomeOwnership] = useState('')
+  const [quarter, setQuarter] = useState('')
+  const [term, setTerm] = useState('')
+  const [year, setYear] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,13 +31,35 @@ const App = () => {
     setHomeOwnership(event.target.value)
   }
 
+  const handleQuarterChange = (event) => {
+    setQuarter(event.target.value)
+  }
+
+  const handleTermChange = (event) => {
+    setTerm(event.target.value)
+  }
+
+  const handleYearChange = (event) => {
+    setYear(event.target.value)
+  }
+
+  console.log('quarter', quarter)
+  console.log('loanData', loanData[0])
+
   return (
     <div>
+
       <LoanTable data={loanData} homeOwnership={homeOwnership} />
-      <div>
-        <Dropdown label="Home Ownership" options={homeOwnershipEnum} 
-          value={homeOwnership} handleChange={handleHomeOwnershipChange} />
-      </div>
+        <Box sx={{ display: 'flex', justifyContent: 'space-evenly', paddingTop: '50px' }}>
+          <Dropdown label="Home Ownership" options={Object.values(homeOwnershipEnum)} 
+            value={homeOwnership} handleChange={handleHomeOwnershipChange} />
+          <Dropdown label="Quarter" options={['1', '2', '3', '4']} 
+            value={quarter} handleChange={handleQuarterChange} />
+          <Dropdown label="Term" options={[' 36 months', ' 60 months']} 
+            value={term} handleChange={handleTermChange} />
+          <Dropdown label="Year" options={['2010', '2011', '2012', '2013', '2014', '2015', '2016']} 
+            value={year} handleChange={handleYearChange} />
+        </Box>
     </div>
   )
 }

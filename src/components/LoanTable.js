@@ -8,7 +8,7 @@ import {
     TableRow
 } from '@mui/material'
 
-export const LoanTable = ({data, homeOwnership}) => {
+export const LoanTable = ({data, homeOwnership, quarter, term, year}) => {
     // get all unique grades present in the data
     const uniqueGrades = [...new Set(data.map(obj => obj.grade))]
     // sort the grades from lowest to highest
@@ -30,7 +30,13 @@ export const LoanTable = ({data, homeOwnership}) => {
             if (!!homeOwnership && obj.homeOwnership === homeOwnership.toUpperCase()) {
                 // add the currentBalance to the sum in the appropriate key-value pair in currentBalanceSum
                 currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance)
-            } else if (!homeOwnership) { 
+            } if (!!quarter && obj.quarter === quarter) {
+                currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance)
+            } else if (!!term && obj.term === term) {
+                currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance)
+            } else if (!!year && obj.year === year) {
+                currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance)
+            } else if (!homeOwnership && !quarter && !term && !year) { 
                 currentBalanceSum[obj.grade] += parseFloat(obj.currentBalance) }
         })
 
