@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <Box sx={{ padding: '100px' }}>
-      <LoanTable data={loanData} homeOwnership={homeOwnership} />
+      <LoanTable data={loanData} homeOwnership={homeOwnership} quarter={quarter} term={term} year={year} />
         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', paddingTop: '50px' }}>
           <Dropdown label="Home Ownership" options={Object.values(homeOwnershipEnum)} 
             value={homeOwnership} handleChange={handleHomeOwnershipChange} />
