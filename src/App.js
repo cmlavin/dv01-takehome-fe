@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { getData } from './request/api'
 import { LoanTable } from './components/LoanTable'
 import { Dropdown } from './common/Dropdown'
@@ -43,8 +43,12 @@ const App = () => {
     setYear(event.target.value)
   }
 
-  console.log('quarter', quarter)
-  console.log('loanData', loanData[0])
+  const handleFilterReset = () => {
+    setHomeOwnership('')
+    setQuarter('')
+    setTerm('')
+    setYear('')
+  }
 
   return (
     <div>
@@ -59,6 +63,7 @@ const App = () => {
             value={term} handleChange={handleTermChange} />
           <Dropdown label="Year" options={['2010', '2011', '2012', '2013', '2014', '2015', '2016']} 
             value={year} handleChange={handleYearChange} />
+          <Button variant="outlined" onClick={() => handleFilterReset()}>Reset</Button>
         </Box>
     </div>
   )
