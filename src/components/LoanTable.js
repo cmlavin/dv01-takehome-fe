@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    Paper,
     Table, 
     TableBody, 
     TableCell, 
@@ -16,7 +17,7 @@ export const LoanTable = ({data, homeOwnership, quarter, term, year}) => {
 
     const generateColumns = () => {
         return sortedGrades.map(grade => 
-            <TableCell key={`grade-${grade}`}>{`Grade ${grade}`}</TableCell>)
+            <TableCell key={`grade-${grade}`} sx={{ textAlign: 'center' }}>{`Grade ${grade}`}</TableCell>)
     }
 
     const generateRows = () => {
@@ -41,12 +42,12 @@ export const LoanTable = ({data, homeOwnership, quarter, term, year}) => {
         })
 
         return Object.values(currentBalanceSum).map((sum, index) => 
-            <TableCell key={`current-balance-${index}-sum`}>{`$${sum.toFixed(2)}`}</TableCell>
+            <TableCell key={`current-balance-${index}-sum`} sx={{ textAlign: 'center' }}>{`$${sum.toFixed(2)}`}</TableCell>
         )
     }
 
     return (
-        <TableContainer>
+        <TableContainer component={Paper}>
             <Table>
                 <TableHead>
                     <TableRow>

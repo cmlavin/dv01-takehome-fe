@@ -51,8 +51,7 @@ const App = () => {
   }
 
   return (
-    <div>
-
+    <Box sx={{ padding: '100px' }}>
       <LoanTable data={loanData} homeOwnership={homeOwnership} />
         <Box sx={{ display: 'flex', justifyContent: 'space-evenly', paddingTop: '50px' }}>
           <Dropdown label="Home Ownership" options={Object.values(homeOwnershipEnum)} 
@@ -65,7 +64,7 @@ const App = () => {
             value={year} handleChange={handleYearChange} />
           <Button variant="outlined" onClick={() => handleFilterReset()}>Reset</Button>
         </Box>
-    </div>
+    </Box>
   )
 }
 
